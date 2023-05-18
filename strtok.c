@@ -1,26 +1,6 @@
 #include "shell.h"
 
 /**
- * check_match - checks if a character matches any in a string
- * @c: character to check
- * @str: string to check
- *
- * Return: 1 if match, 0 if not
- */
-
-unsigned int check_match(char c, const char *str)
-{
-	unsigned int j;
-
-	for (j = 0; str[j] != '\0'; j++)
-	{
-		if (c == str[j])
-			return (1);
-	}
-	return (0);
-}
-
-/**
  * new_strtok - custom strtok
  * @str: string to tokenize
  * @delim: delimiter to tokenize against
@@ -65,4 +45,24 @@ char *new_strtok(char *str, const char *delim)
 			next_token = NULL;
 	}
 	return (token_start);
+}
+
+/**
+ * check_match - checks if a character matches any in a string
+ * @c: character to check
+ * @str: string to check
+ *
+ * Return: 1 if match, 0 if not
+ */
+
+unsigned int check_match(char c, const char *str)
+{
+	unsigned int j;
+
+	for (j = 0; str[j] != '\0'; j++)
+	{
+		if (c == str[j])
+			return (1);
+	}
+	return (0);
 }

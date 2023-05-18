@@ -1,6 +1,22 @@
 #include "shell.h"
 
 /**
+ * free_env - free the shell's environment
+ * @env: shell's environment
+ *
+ * Return: void
+ */
+
+void free_env(char **env)
+{
+	unsigned int j;
+
+	for (j = 0; env[j] != NULL; j++)
+		free(env[j]);
+	free(env);
+}
+
+/**
  * make_env - make the shell environment from the environment passed to main
  * @env: environment passed to main
  *
@@ -24,20 +40,4 @@ char **make_env(char **env)
 		newenv[j] = _strdup(env[j]);
 	newenv[j] = NULL;
 	return (newenv);
-}
-
-/**
- * free_env - free the shell's environment
- * @env: shell's environment
- *
- * Return: void
- */
-
-void free_env(char **env)
-{
-	unsigned int j;
-
-	for (j = 0; env[j] != NULL; j++)
-		free(env[j]);
-	free(env);
 }

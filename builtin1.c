@@ -1,6 +1,29 @@
 #include "shell.h"
 
 /**
+ * find_key - finds an environment variable
+ * @env: array of environment variables
+ * @key: environment variable to find
+ *
+ * Return: pointer to address of the environment variable
+ */
+char **find_key(char **env, char *key)
+{
+	unsigned int j, k, len;
+
+	len = _strlen(key);
+	for (j = 0; env[j] != NULL; j++)
+	{
+		for (k = 0; k < len; k++)
+			if (key[k] != env[j][k])
+				break;
+		if (k == len && env[j][k] == '=')
+			return (&env[j]);
+	}
+	return (NULL);
+}
+
+/**
  * add_key - create a new environment variable
  * @vars: pointer to struct of variables
  *
@@ -36,29 +59,6 @@ void add_key(vars_t *vars)
 	newenv[j + 1] = NULL;
 	free(vars->env);
 	vars->env = newenv;
-}
-
-/**
- * find_key - finds an environment variable
- * @env: array of environment variables
- * @key: environment variable to find
- *
- * Return: pointer to address of the environment variable
- */
-char **find_key(char **env, char *key)
-{
-	unsigned int j, k, len;
-
-	len = _strlen(key);
-	for (j = 0; env[j] != NULL; j++)
-	{
-		for (k = 0; k < len; k++)
-			if (key[k] != env[j][k])
-				break;
-		if (k == len && env[j][k] == '=')
-			return (&env[j]);
-	}
-	return (NULL);
 }
 
 /**

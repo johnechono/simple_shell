@@ -1,6 +1,24 @@
 #include "shell.h"
 
 /**
+ * _env - prints the current environment
+ * @vars: struct of variables
+ *
+ * Return: void.
+ */
+void _env(vars_t *vars)
+{
+	unsigned int j;
+
+	for (j = 0; vars->env[j]; j++)
+	{
+		_puts(vars->env[j]);
+		_puts("\n");
+	}
+	vars->status = 0;
+}
+
+/**
  * check_for_builtins - checks if the command is a builtin
  * @vars: variables
  *
@@ -57,24 +75,6 @@ void new_exit(vars_t *vars)
 	free(vars->commands);
 	free_env(vars->env);
 	exit(vars->status);
-}
-
-/**
- * _env - prints the current environment
- * @vars: struct of variables
- *
- * Return: void.
- */
-void _env(vars_t *vars)
-{
-	unsigned int j;
-
-	for (j = 0; vars->env[j]; j++)
-	{
-		_puts(vars->env[j]);
-		_puts("\n");
-	}
-	vars->status = 0;
 }
 
 /**
