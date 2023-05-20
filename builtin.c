@@ -27,7 +27,7 @@ void _env(vars_t *vars)
 void (*check_for_builtins(vars_t *vars))(vars_t *vars)
 {
 	unsigned int j;
-	builtins_t check[] = {
+	builtin_t check[] = {
 		{"exit", new_exit},
 		{"env", _env},
 		{"setenv", new_setenv},

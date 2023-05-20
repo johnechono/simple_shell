@@ -1,68 +1,69 @@
 #include "shell.h"
 
 /**
- * new_strtok - custom strtok
- * @str: string to tokenize
- * @delim: delimiter to tokenize against
- *
- * Return: pointer to the next token or NULL
- */
-char *new_strtok(char *str, const char *delim)
-{
-	static char *token_start;
-	static char *next_token;
-	unsigned int j;
-
-	if (str != NULL)
-		next_token = str;
-	token_start = next_token;
-	if (token_start == NULL)
-		return (NULL);
-	for (j = 0; next_token[j] != '\0'; j++)
-	{
-		if (check_match(next_token[j], delim) == 0)
-			break;
-	}
-	if (next_token[j] == '\0' || next_token[j] == '#')
-	{
-		next_token = NULL;
-		return (NULL);
-	}
-	token_start = next_token + j;
-	next_token = token_start;
-	for (j = 0; next_token[j] != '\0'; j++)
-	{
-		if (check_match(next_token[j], delim) == 1)
-			break;
-	}
-	if (next_token[j] == '\0')
-		next_token = NULL;
-	else
-	{
-		next_token[j] = '\0';
-		next_token = next_token + j + 1;
-		if (*next_token == '\0')
-			next_token = NULL;
-	}
-	return (token_start);
-}
-
-/**
- * check_match - checks if a character matches any in a string
- * @c: character to check
- * @str: string to check
- *
- * Return: 1 if match, 0 if not
+ * check_match - checks if character matches a string
+ * @c: character string
+ * @str: string that will be checked
+ * Return: 1 if positive
+ * O/W: 0
  */
 
 unsigned int check_match(char c, const char *str)
 {
 	unsigned int j;
 
-	for (j = 0; str[j] != '\0'; j++)
+	while (str[j] != '\0')
 	{
 		if (c == str[j])
-			return (1);
+		return (1);
+		j++;
 	}
 	return (0);
 }
+
+/**
+ * new_strtok - custom version
+ * @delim: delimiter
+ * @str: tokenized string
+ * Return: void
+ */
+char *new_strtok(char *str, const char *delim)
+{
+	unsigned int j;
+	static char *nxt_tok;
+	static char *tok_strt;
+
+	if (str != NULL)
+		nxt_tok = str;
+	tok_strt = nxt_tok;
+	if (tok_strt == NULL)
+		return (NULL);
+	for (j = 0; nxt_tok[j] != '\0'; j++)
+	{
+		if (check_match(nxt_tok[j], delim) == 0)
+			break;
+	}
+	if (nxt_tok[j] == '\0' || nxt_tok[j] == '#')
+	{
+		nxt_tok = NULL;
+		return (NULL);
+	}
+	tok_strt = nxt_tok + j;
+	nxt_tok = tok_strt;
+	for (j = 0; nxt_tok[j] != '\0'; j++)
+	{
+		if (check_match(nxt_tok[j], delim) == 1)
+			break;
+	}
+	if (nxt_tok[j] == '\0')
+		nxt_tok = NULL;
+	else
+	{
+		nxt_tok[j] = '\0';
+		nxt_tok = nxt_tok + j + 1;
+		if (*nxt_tok == '\0')
+			nxt_tok = NULL;
+	}
+	return (tok_strt);
+}
+

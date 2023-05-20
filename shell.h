@@ -11,6 +11,38 @@
 #include <string.h>
 #include <sys/types.h>
 
+/**
+ * struct variable - the variable
+ * @count: command count
+ * @argv: argument
+ * @status: status of exit
+ * @commands: command double pointer
+ * @av: arguments of command line
+ * @buffer: buffering command
+ * @env: variables in the environ
+ */
+typedef struct variable
+{
+	char **argv;
+	int status;
+	char **commands;
+	char **av;
+	char *buffer;
+	char **env;
+	size_t count;
+} vars_t;
+
+/**
+ * struct builtin - struct type for builtin function
+ * @f: fnctn for builtin
+ * @name: builtin command name
+ */
+typedef struct builtin
+{
+	char *name;
+	void (*f)(vars_t *);
+} builtin_t;
+
 void _puts2(char *str);
 char *_uitoa(unsigned int count);
 void print_error(vars_t *vars, char *msg);
@@ -44,37 +76,5 @@ char **tokenize(char *buffer, char *delimiter);
 
 char **make_env(char **env);
 void free_env(char **env);
-
-/**
- * struct builtin - struct type for builtin function
- * @f: fnctn for builtin
- * @name: builtin command name
- */
-typedef struct builtin
-{
-	char *name;
-	void (*f)(vars_t *);
-} builtin_t;
-
-/**
- * struct variable - the variable
- * @count: command count
- * @argv: argument
- * @status: status of exit
- * @commands: command double pointer
- * @av: arguments of command line
- * @buffer: buffering command
- * @env: variables in the environ
- */
-typedef struct variable
-{
-	char **argv;
-	int status;
-	char **commands;
-	char **av;
-	char *buffer;
-	char **env;
-	size_t count;
-} vars_t;
 
 #endif
