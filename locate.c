@@ -1,10 +1,10 @@
 #include "shell.h"
 /**
- * path_execute - executes a command in the path
+ * path_execute - executes a program in path
  * @command: full path to the command
  * @vars: pointer to struct of variables
  *
- * Return: 0 on success, 1 on failure
+ * Return: 0 on success, 1 otherwise
  */
 int path_execute(char *command, vars_t *vars)
 {
@@ -41,10 +41,10 @@ int path_execute(char *command, vars_t *vars)
 }
 
 /**
- * find_path - finds the PATH variable
+ * find_path - find a program in PATH
  * @env: array of environment variables
  *
- * Return: pointer to the node that contains the PATH, or NULL on failure
+ * Return: 0 if success, or NULL otherwise
  */
 char *find_path(char **env)
 {
@@ -114,7 +114,7 @@ void check_for_path(vars_t *vars)
  * execute_cwd - executes the command in the current working directory
  * @vars: pointer to struct of variables
  *
- * Return: 0 on success, 1 on failure
+ * Return: 0 on success, 1 otherwise
  */
 int execute_cwd(vars_t *vars)
 {
@@ -157,7 +157,7 @@ int execute_cwd(vars_t *vars)
 	return (0);
 }
 /**
- * check_for_dir - checks if the command is a part of a path
+ * check_for_dir - checks if exits a file, if it is not a directory
  * @str: command
  *
  * Return: 1 on success, 0 on failure
