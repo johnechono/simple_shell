@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * _realloc - reallocates a pointer to double the space
+ * _realloc - reallocates a pointer to double the space in the shell
  * @ptr: pointer to the old array
  * @size: pointer to number of elements in the old array
  *

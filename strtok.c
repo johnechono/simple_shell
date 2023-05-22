@@ -23,9 +23,9 @@ unsigned int check_match(char c, const char *str)
 
 /**
  * new_strtok - custom version
- * @delim: delimiter
- * @str: tokenized string
- * Return: void
+ * @delim: it's characters we mark off string in parts
+ * @str: string
+ * Return: nothing
  */
 char *new_strtok(char *str, const char *delim)
 {

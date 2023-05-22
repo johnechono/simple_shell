@@ -1,10 +1,10 @@
 #include "shell.h"
 
 /**
- * _env - prints the current environment
- * @vars: struct of variables
+ * _env - shows the current environment where the shell runs
+ * @vars: struct of variables for the program's data
  *
- * Return: void.
+ * Return: nothing
  */
 void _env(vars_t *vars)
 {
@@ -20,9 +20,9 @@ void _env(vars_t *vars)
 
 /**
  * check_for_builtins - checks if the command is a builtin
- * @vars: variables
+ * @vars: variables for the program's data
  *
- * Return: pointer to the function or NULL
+ * Return: pointer to the function or NULL otherwise
  */
 void (*check_for_builtins(vars_t *vars))(vars_t *vars)
 {
@@ -46,10 +46,10 @@ void (*check_for_builtins(vars_t *vars))(vars_t *vars)
 }
 
 /**
- * new_exit - exit program
- * @vars: variables
+ * new_exit - exit of the program with the status
+ * @vars: variables for the program's data
  *
- * Return: void
+ * Return: nothing
  */
 void new_exit(vars_t *vars)
 {
@@ -78,10 +78,9 @@ void new_exit(vars_t *vars)
 }
 
 /**
- * new_setenv - create a new environment variable, or edit an existing variable
- * @vars: pointer to struct of variables
- *
- * Return: void
+ * new_setenv - create or edit a new environment or existing variable
+ * @vars: pointer to struct of variables for the program's data
+ * Return: nothing
  */
 void new_setenv(vars_t *vars)
 {
@@ -117,9 +116,9 @@ void new_setenv(vars_t *vars)
 
 /**
  * new_unsetenv - remove an environment variable
- * @vars: pointer to a struct of variables
+ * @vars: pointer to a struct of variables for the program's data
  *
- * Return: void
+ * Return: nothing
  */
 void new_unsetenv(vars_t *vars)
 {
