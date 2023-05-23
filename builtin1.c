@@ -75,12 +75,12 @@ char *add_value(char *key, char *value)
 	new = malloc(sizeof(char) * (lens1 + lens2 + 2));
 	if (new == NULL)
 		return (NULL);
-	for (k = 0; value[k] != '\0'; k++)
-		new[j + 1 + k] = value[k];
-        new[j + 1 + k] = '\0';
 	for (j = 0; key[j] != '\0'; j++)
 		new[j] = key[j];
 	new[j] = '=';
+	for (k = 0; value[k] != '\0'; k++)
+		new[j + 1 + k] = value[k];
+	new[j + 1 + k] = '\0';
 	return (new);
 }
 
