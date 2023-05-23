@@ -1,27 +1,6 @@
 #include "shell.h"
 
 /**
- * check_match - checks if character matches a string
- * @c: character string
- * @str: string that will be checked
- * Return: 1 if positive
- * O/W: 0
- */
-
-unsigned int check_match(char c, const char *str)
-{
-	unsigned int j;
-
-	while (str[j] != '\0')
-	{
-		if (c == str[j])
-		return (1);
-		j++;
-	}
-	return (0);
-}
-
-/**
  * new_strtok - custom version
  * @delim: it's characters we mark off string in parts
  * @str: string
@@ -65,5 +44,26 @@ char *new_strtok(char *str, const char *delim)
 			nxt_tok = NULL;
 	}
 	return (tok_strt);
+
+}
+/**
+ * check_match - checks if character matches a string
+ * @c: character string
+ * @str: string that will be checked
+ * Return: 1 if positive
+ * O/W: 0
+ */
+
+unsigned int check_match(char c, const char *str)
+{
+	unsigned int j;
+
+	while (str[j] != '\0')
+	{
+		if (c == str[j])
+		return (1);
+		j++;
+	}
+	return (0);
 }
 
