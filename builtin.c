@@ -1,28 +1,9 @@
 #include "shell.h"
 
 /**
- * _env - shows the current environment where the shell runs
- * @vars: struct of variables for the program's data
- *
- * Return: nothing
- */
-void _env(vars_t *vars)
-{
-	unsigned int j;
-
-	for (j = 0; vars->env[j]; j++)
-	{
-		_puts(vars->env[j]);
-		_puts("\n");
-	}
-	vars->status = 0;
-}
-
-/**
- * check_for_builtins - checks if the command is a builtin
- * @vars: variables for the program's data
- *
- * Return: pointer to the function or NULL otherwise
+ * check_for_builtins - checking for cmd builtin
+ * @vars: program variable
+ * Return: pointer O/W - NULL
  */
 void (*check_for_builtins(vars_t *vars))(vars_t *vars)
 {
@@ -46,41 +27,26 @@ void (*check_for_builtins(vars_t *vars))(vars_t *vars)
 }
 
 /**
- * new_exit - exit of the program with the status
- * @vars: variables for the program's data
- *
- * Return: nothing
+ * _env - dislays the enivonment
+ * @vars: variable struct
+ * Return: void
  */
-void new_exit(vars_t *vars)
+void _env(vars_t *vars)
 {
-	int status;
+	unsigned int j;
 
-	if (_strcmpr(vars->av[0], "exit") == 0 && vars->av[1] != NULL)
+	for (j = 0; vars->env[j]; j++)
 	{
-		status = _atoi(vars->av[1]);
-		if (status == -1)
-		{
-			vars->status = 2;
-			print_error(vars, ": Illegal number: ");
-			_puts2(vars->av[1]);
-			_puts2("\n");
-			free(vars->commands);
-			vars->commands = NULL;
-			return;
-		}
-		vars->status = status;
+		_puts(vars->env[j]);
+		_puts("\n");
 	}
-	free(vars->buffer);
-	free(vars->av);
-	free(vars->commands);
-	free_env(vars->env);
-	exit(vars->status);
+	vars->status = 0;
 }
 
 /**
- * new_setenv - create or edit a new environment or existing variable
- * @vars: pointer to struct of variables for the program's data
- * Return: nothing
+ * new_setenv - editing or creating a fresh environ
+ * @vars: struct pointer
+ * Return: void
  */
 void new_setenv(vars_t *vars)
 {
@@ -89,7 +55,7 @@ void new_setenv(vars_t *vars)
 
 	if (vars->av[1] == NULL || vars->av[2] == NULL)
 	{
-		print_error(vars, ": incorrect numbers of argument\n");
+		print_error(vars, ": invalid number of args\n");
 		vars->status = 2;
 		return;
 	}
@@ -115,10 +81,9 @@ void new_setenv(vars_t *vars)
 }
 
 /**
- * new_unsetenv - remove an environment variable
- * @vars: pointer to a struct of variables for the program's data
- *
- * Return: nothing
+ * new_unsetenv - removing the environment variable
+ * @vars: struct pointer
+ * Return: void
  */
 void new_unsetenv(vars_t *vars)
 {
@@ -128,14 +93,14 @@ void new_unsetenv(vars_t *vars)
 
 	if (vars->av[1] == NULL)
 	{
-		print_error(vars, ": incorrect numbers of argument\n");
+		print_error(vars, ": invalid number of args\n");
 		vars->status = 2;
 		return;
 	}
 	key = find_key(vars->env, vars->av[1]);
 	if (key == NULL)
 	{
-		print_error(vars, ": No variable to unset");
+		print_error(vars, ": no unsettable variable");
 		return;
 	}
 	for (j = 0; vars->env[j] != NULL; j++)
@@ -156,4 +121,35 @@ void new_unsetenv(vars_t *vars)
 	free(vars->env);
 	vars->env = newenv;
 	vars->status = 0;
+}
+
+/**
+ * new_exit - programmable exit
+ * @vars: programmable variable
+ * Return: void
+ */
+void new_exit(vars_t *vars)
+{
+	int status;
+
+	if (_strcmpr(vars->av[0], "exit") == 0 && vars->av[1] != NULL)
+	{
+		status = _atoi(vars->av[1]);
+		if (status == -1)
+		{
+			vars->status = 2;
+			print_error(vars, ": Illegal number: ");
+			_puts2(vars->av[1]);
+			_puts2("\n");
+			free(vars->commands);
+			vars->commands = NULL;
+			return;
+		}
+		vars->status = status;
+	}
+	free(vars->buffer);
+	free(vars->av);
+	free(vars->commands);
+	free_env(vars->env);
+	exit(vars->status);
 }
