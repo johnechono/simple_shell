@@ -1,6 +1,27 @@
 #include "shell.h"
 
 /**
+ * _putfd - puts fd
+ * @c: printable character
+ * @fd: written file descriptor
+ * Return: 1 or -1
+ */
+int _putfd(char c, int fd)
+{
+	static int j;
+	static char buf[WRITE_BUF_SIZE];
+
+	if (c == BUF_FLUSH || j >= WRITE_BUF_SIZE)
+	{
+		write(fd, buf, j);
+		j = 0;
+	}
+	if (c != BUF_FLUSH)
+		buf[j++] = c;
+	return (1);
+}
+
+/**
  *_putsfd - writes char to given fd
  * @str: string to be printed
  * @fd: file descriptor
