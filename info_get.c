@@ -3,71 +3,71 @@
 /**
  * free_info - frees info
  * @all: all fields
- * @infor: struct
+ * @info: struct
  */
-void free_info(infor_t *infor, int all)
+void free_info(info_t *info, int all)
 {
-	ffree(infor->argv);
-	infor->argv = NULL;
-	infor->path = NULL;
+	ffree(info->argv);
+	info->argv = NULL;
+	info->path = NULL;
 	if (all)
 	{
-		if (!infor->cmd_buf)
-			free(infor->arg);
-		if (infor->env)
-			free_list(&(infor->env));
-		if (infor->history)
-			free_list(&(infor->history));
-		if (infor->alias)
-			free_list(&(infor->alias));
-		ffree(infor->environ);
-			infor->environ = NULL;
-		bfree((void **)infor->cmd_buf);
-		if (infor->readfd > 2)
-			close(infor->readfd);
+		if (!info->cmd_buf)
+			free(info->arg);
+		if (info->env)
+			free_list(&(info->env));
+		if (info->history)
+			free_list(&(info->history));
+		if (info->alias)
+			free_list(&(info->alias));
+		ffree(info->environ);
+			info->environ = NULL;
+		bfree((void **)info->cmd_buf);
+		if (info->readfd > 2)
+			close(info->readfd);
 		_putchar(BUF_FLUSH);
 	}
 }
 
 /**
  * clear_info - initializes info_t struct
- * @infor: struct address
+ * @info: struct address
  */
-void clear_info(infor_t *infor)
+void clear_info(info_t *info)
 {
-	infor->arg = NULL;
-	infor->argv = NULL;
-	infor->path = NULL;
-	infor->argc = 0;
+	info->arg = NULL;
+	info->argv = NULL;
+	info->path = NULL;
+	info->argc = 0;
 }
 
 /**
  * set_info - initializes info_t struct
  * @av: argument vector
- * @infor: info
+ * @info: info
  */
-void set_info(infor_t *infor, char **av)
+void set_info(info_t *info, char **av)
 {
 	int j = 0;
 
-	infor->fname = av[0];
-	if (infor->arg)
+	info->fname = av[0];
+	if (info->arg)
 	{
-		infor->argv = strtow(infor->arg, " \t");
-		if (!infor->argv)
+		info->argv = strtow(info->arg, " \t");
+		if (!info->argv)
 		{
-			infor->argv = malloc(sizeof(char *) * 2);
-			if (infor->argv)
+			info->argv = malloc(sizeof(char *) * 2);
+			if (info->argv)
 			{
-				infor->argv[0] = _strdup(infor->arg);
-				infor->argv[1] = NULL;
+				info->argv[0] = _strdup(info->arg);
+				info->argv[1] = NULL;
 			}
 		}
-		for (j = 0; infor->argv && infor->argv[j]; j++)
+		for (j = 0; info->argv && info->argv[j]; j++)
 			;
-		infor->argc = j;
+		info->argc = j;
 
-		replace_alias(infor);
-		replace_vars(infor);
+		replace_alias(info);
+		replace_vars(info);
 	}
 }

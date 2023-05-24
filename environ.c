@@ -1,41 +1,41 @@
 #include "shell.h"
 
 /**
- * _myenv - prints current environment
- * @infor: Used to maintain constant function prototype.
- * Return: Always 0
+ * _myenv - prints current environ
+ * @info: info
+ * Return: 0
  */
-int _myenv(infor_t *infor)
+int _myenv(info_t *info)
 {
-	print_list_str(infor->env);
+	print_list_str(info->env);
 	return (0);
 }
 
 /**
  * populate_env_list - populates env list
- * @infor: Used to maintain constant function prototype.
+ * @info: Used to maintain constant function prototype.
  * Return: Always 0
  */
-int populate_env_list(infor_t *infor)
+int populate_env_list(info_t *info)
 {
 	list_t *node = NULL;
 	size_t j;
 
 	for (j = 0; environ[j]; j++)
 		add_node_end(&node, environ[j], 0);
-	infor->env = node;
+	info->env = node;
 	return (0);
 }
 
 /**
- * _getenv - gets the value of an environ var
- * @infor: Used to maintain
- * @name: environment variable name
- * Return: value
+ * _getenv - gets the value
+ * @info: info
+ * @name: environment name
+ * Return: value of name
  */
-char *_getenv(infor_t *infor, const char *name)
+char *_getenv(info_t *info, const char *name)
 {
-	list_t *node = infor->env;
+	list_t *node = info->env;
 	char *q;
 
 	while (node)
@@ -49,15 +49,15 @@ char *_getenv(infor_t *infor, const char *name)
 }
 
 /**
- * _mysetenv - Initialize a new environment variable
- * @infor: structure containing potential argument
+ * _mysetenv - setenv
+ * @info: info
  * Return: Always 0
  */
-int _mysetenv(infor_t *infor)
+int _mysetenv(info_t *info)
 {
-	if (infor->argc != 3)
+	if (info->argc != 3)
 	{
-		_eputs("Incorrect number of arguements\n");
+		_eputs("Invalid argument number\n");
 		return (1);
 	}
 	if (_setenv(infor, infor->argv[1], infor->argv[2]))
@@ -66,21 +66,21 @@ int _mysetenv(infor_t *infor)
 }
 
 /**
- * _myunsetenv - Remove an environment variable
- * @infor: Structure containing potential arguments.
- * Return: Always 0
+ * _myunsetenv - Remove an unsetenv
+ * @info: info
+ * Return: 0
  */
-int _myunsetenv(infor_t *infor)
+int _myunsetenv(info_t *info)
 {
 	int j;
 
-	if (infor->argc == 1)
+	if (info->argc == 1)
 	{
-		_eputs("Few arguements.\n");
+		_eputs("little arguments.\n");
 		return (1);
 	}
-	for (j = 1; j <= infor->argc; j++)
-		_unsetenv(info, infor->argv[j]);
+	for (j = 1; j <= info->argc; j++)
+		_unsetenv(info, info->argv[j]);
 
 	return (0);
 }

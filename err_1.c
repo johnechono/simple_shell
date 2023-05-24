@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * remove_comments - function replaces first instance of '#' with '\0'
+ * remove_comments - remove comments
  * @buff: address
  * Return: Always 0;
  */
@@ -18,45 +18,45 @@ void remove_comments(char *buff)
 }
 
 /**
- * _erratoi - function to convert str to an int
+ * _erratoi - convert str to an int
  * @g: string
  * Return: 0
  */
 int _erratoi(char *g)
 {
 	int j = 0;
-	unsigned long int result = 0;
+	unsigned long int res = 0;
 
 	if (*g == '+')
-		g++;  /* TODO: why does this make main return 255? */
+		g++;
 	for (j = 0;  g[j] != '\0'; j++)
 	{
 		if (g[j] >= '0' && g[j] <= '9')
 		{
-			result *= 10;
-			result += (g[j] - '0');
-			if (result > INT_MAX)
+			res *= 10;
+			res += (g[j] - '0');
+			if (res > INT_MAX)
 				return (-1);
 		}
 		else
 			return (-1);
 	}
-	return (result);
+	return (res);
 }
 
 /**
- * print_error - prints an error msg
- * @infor: return info struct
- * @estrg: string containing specified error type
+ * print_error - prints  error msg
+ * @info: struct info
+ * @estrg: string
  * Return: 0
  */
-void print_error(infor_t *infor, char *estrg)
+void print_error(info_t *info, char *estrg)
 {
-	_eputs(infor->fname);
+	_eputs(info->fname);
 	_eputs(": ");
-	print_d(infor->line_count, STDERR_FILENO);
+	print_d(info->line_count, STDERR_FILENO);
 	_eputs(": ");
-	_eputs(infor->argv[0]);
+	_eputs(info->argv[0]);
 	_eputs(": ");
 	_eputs(estrg);
 }
@@ -65,7 +65,7 @@ void print_error(infor_t *infor, char *estrg)
  * print_d - function prints a decimal
  * @inputs: inputs
  * @fd: the filedescriptor to write
- * Return: number of characters printed
+ * Return: char printed
  */
 int print_d(int inputs, int fd)
 {
@@ -100,23 +100,23 @@ int print_d(int inputs, int fd)
 }
 
 /**
- * convert_number - converter
+ * convert_number - convert number
  * @numb: number
  * @base: the base
  * @flags: arg flags
  * Return: strg
  */
-char *convert_number(long int num, int base, int flags)
+char *convert_number(long int numb, int base, int flags)
 {
 	static char *array;
 	static char buffer[50];
 	char sign = 0;
 	char *ptr;
-	unsigned long n = num;
+	unsigned long n = numb;
 
 	if (!(flags & CONVERT_UNSIGNED) && num < 0)
 	{
-		n = -num;
+		n = -numb;
 		sign = '-';
 
 	}
