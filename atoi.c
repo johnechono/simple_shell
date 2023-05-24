@@ -46,13 +46,13 @@ int interactive(info_t *info)
 }
 
 /**
- * is_delimit - checks if the char is  delimeter
+ * is_delim - checks if the char is  delimeter
  * @delimit: delimit string
  * @b: char checker
  * Return: 1 if true
  * O/W: 0
  */
-int is_delimit(char b, char *delimit)
+int is_delim(char b, char *delimit)
 {
 	while (*delimit)
 		if (*delimit++ == b)
@@ -63,13 +63,13 @@ int is_delimit(char b, char *delimit)
 }
 
 /**
- * _isalphab - checks for alphabetic character
+ * _isalpha - checks for alphabetic character
  * @a: The character to input
  * Return: 1
  * O/W: 0
  */
 
-int _isalphab(int a)
+int _isalpha(int a)
 {
 	if ((a >= 'a' && a <= 'z') || (a >= 'A' && a <= 'Z'))
 		return (1);
