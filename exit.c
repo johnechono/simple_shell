@@ -36,7 +36,7 @@ char *_strncpy(char *dest, char *src, int n)
 	}
 	if (j < n)
 	{
-		k = i;
+		k = j;
 		while (k < n)
 		{
 			dest[k] = '\0';
@@ -71,20 +71,4 @@ char *_strncat(char *dest, char *src, int n)
 	if (k < n)
 		dest[j] = '\0';
 	return (s);
-}
-
-/**
- * *_strchr - locates a char in a string
- * @s: string
- * @c: the char to look for
- * Return: (s) a pointer to the memory area s
- */
-char *_strchr(char *s, char c)
-{
-	do {
-		if (*s == c)
-			return (s);
-	} while (*s++ != '\0');
-
-	return (NULL);
 }

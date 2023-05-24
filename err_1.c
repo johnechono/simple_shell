@@ -133,20 +133,3 @@ char *convert_number(long int num, int base, int flags)
 		*--ptr = sign;
 	return (ptr);
 }
-
-/**
- * remove_comments - function replaces first instance of '#' with '\0'
- * @buf: address
- * Return: Always 0;
- */
-void remove_comments(char *buf)
-{
-	int j;
-
-	for (j = 0; buf[j] != '\0'; j++)
-		if (buf[j] == '#' && (!j || buf[j - 1] == ' '))
-		{
-			buf[j] = '\0';
-			break;
-		}
-}
