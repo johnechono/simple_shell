@@ -9,38 +9,38 @@
  */
 ssize_t input_buf(info_t *info, char **buf, size_t *length)
 {
-        size_t len_q = 0;
-        ssize_t s = 0;
+	size_t len_q = 0;
+	ssize_t s = 0;
 
-        if (!*length)
-        {
-                /*bfree((void **)info->cmd_buf);*/
-                free(*buf);
-                *buf = NULL;
-                signal(SIGINT, sigintHandler);
+	if (!*length)
+	{
+		/*bfree((void **)info->cmd_buf);*/
+		free(*buf);
+		*buf = NULL;
+		signal(SIGINT, sigintHandler);
 #if USE_GETLINE
-                s = getline(buf, &len_q, stdin);
+		s = getline(buf, &len_q, stdin);
 #else
-                s = _getline(info, buf, &len_q);
+		s = _getline(info, buf, &len_q);
 #endif
-                if (s > 0)
-                {
-                        if ((*buf)[s - 1] == '\n')
-                        {
-                                (*buf)[s - 1] = '\0';
-                                s--;
-                        }
-                        info->linecount_flag = 1;
-                        remove_comments(*buf);
-                        build_history_list(info, *buf, info->histcount++);
-                        /* if (_strchr(*buf, ';')) command chain? */
-                        {
-                                *length = s;
-                                info->cmd_buf = buf;
-                        }
-                }
-        }
-        return (s);
+		if (s > 0)
+		{
+			if ((*buf)[s - 1] == '\n')
+		{
+				(*buf)[s - 1] = '\0';
+				s--;
+		}
+			info->linecount_flag = 1;
+			remove_comments(*buf);
+			build_history_list(info, *buf, info->histcount++);
+			/* if (_strchr(*buf, ';')) command chain? */
+			{
+				*length = s;
+				info->cmd_buf = buf;
+			}
+		}
+	}
+	return (s);
 }
 
 /**
