@@ -33,7 +33,7 @@ int main(int argc __attribute__((unused)), char **argv, char **environment)
 {
 	unsigned int pipe = 0, j;
 	size_t lens_buff = 0;
-	vars_t vars = {NULL, NULL, NULL, 0, NULL, 0, NULL};
+	vars_t vars = {NULL, 0, NULL, 0, NULL, 0, 0};
 
 	vars.env = make_env(environment);
 	vars.argv = argv;
