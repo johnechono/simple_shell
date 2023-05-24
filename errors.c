@@ -2,22 +2,22 @@
 
 /**
  * _putfd - puts fd
- * @c: printable character
+ * @d: printable character
  * @fd: written file descriptor
  * Return: 1 or -1
  */
-int _putfd(char c, int fd)
+int _putfd(char d, int fd)
 {
 	static int j;
 	static char buf[WRITE_BUF_SIZE];
 
-	if (c == BUF_FLUSH || j >= WRITE_BUF_SIZE)
+	if (d == BUF_FLUSH || j >= WRITE_BUF_SIZE)
 	{
 		write(fd, buf, j);
 		j = 0;
 	}
-	if (c != BUF_FLUSH)
-		buf[j++] = c;
+	if (d != BUF_FLUSH)
+		buf[j++] = d;
 	return (1);
 }
 
@@ -60,21 +60,21 @@ void _eputs(char *str)
 
 /**
  * _eputchar - writes the char
- * @c: character to print
+ * @d: character to print
  * Return: On success 1.
  * On error, -1 is returned, and errno is set appropriately.
  */
-int _eputchar(char c)
+int _eputchar(char d)
 {
 	static int j;
 	static char buf[WRITE_BUF_SIZE];
 
-	if (c == BUF_FLUSH || j >= WRITE_BUF_SIZE)
+	if (d == BUF_FLUSH || j >= WRITE_BUF_SIZE)
 	{
 		write(2, buf, j);
 		j = 0;
 	}
-	if (c != BUF_FLUSH)
-		buf[j++] = c;
+	if (d != BUF_FLUSH)
+		buf[j++] = d;
 	return (1);
 }
