@@ -24,16 +24,16 @@ int is_cmd(info_t *info, char *path)
 /**
  * find_path - finds this cmd in the PATH string
  * @cmd: executable
- * @pathstr: PATH of the string
+ * @path_str: PATH of the string
  * @info: strut info
  * Return: complete path or NULL
  */
-char *find_path(info_t *info, char *pathstr, char *cmd)
+char *find_path(info_t *info, char *path_str, char *cmd)
 {
 	int j = 0, pos_curr = 0;
 	char *path;
 
-	if (!pathstr)
+	if (!path_str)
 		return (NULL);
 	if ((_strlen(cmd) > 2) && starts_with(cmd, "./"))
 	{
@@ -42,9 +42,9 @@ char *find_path(info_t *info, char *pathstr, char *cmd)
 	}
 	while (1)
 	{
-		if (!pathstr[j] || pathstr[j] == ':')
+		if (!path_str[j] || path_str[j] == ':')
 		{
-			path = dup_chars(pathstr, pos_curr, j);
+			path = dup_chars(path_str, pos_curr, j);
 			if (!*path)
 				_strcat(path, cmd);
 			else
@@ -54,7 +54,7 @@ char *find_path(info_t *info, char *pathstr, char *cmd)
 			}
 			if (is_cmd(info, path))
 				return (path);
-			if (!pathstr[j])
+			if (!path_str[j])
 				break;
 			pos_curr = j;
 		}
@@ -65,20 +65,20 @@ char *find_path(info_t *info, char *pathstr, char *cmd)
 
 /**
  * dup_chars - WILL duplicate the characters
- * @stop: stop
- * @pathstr: string of the PATH
- * @start: start
+ * @stp: stop
+ * @path_str: string of the PATH
+ * @strt: start
  * Return: pointer
  */
-char *dup_chars(char *pathstr, int start, int stop)
+char *dup_chars(char *path_str, int strt, int stp)
 {
 	static char buf[1024];
 	int j = 0, l = 0;
 
-	for (l = 0, j = start; j < stop; j++)
-		if (pathstr[j] != ':')
+	for (l = 0, j = strt; j < stp; j++)
+		if (path_str[j] != ':')
 		{
-			buf[l++] = pathstr[j];
+			buf[l++] = path_str[j];
 		}
 	buf[l] = 0;
 	return (buf);

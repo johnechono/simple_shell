@@ -52,21 +52,21 @@ typedef struct passinfo
 	char **argv;
 	char *path;
 	int argc;
-	char **environ;
+	unsigned int line_count;
 	int err_num;
 	int linecount_flag;
 	char *fname;
-	int env_changed;
-	int status;
-	unsigned int line_count;
 	list_t *env;
 	list_t *history;
 	list_t *alias;
+	char **environ;
+	int env_changed;
+	int status;
 
-	int readfd;
-	int histcount;
 	char **cmd_buf;
 	int cmd_buf_type;
+	int readfd;
+	int histcount;
 } info_t;
 
 #define INFO_INIT \
@@ -74,9 +74,9 @@ typedef struct passinfo
 	0, 0, 0}
 
 /**
- *struct builtin - contains a builtin string and related function
- *@type: the builtin command flag
- *@func: the function
+ *struct builtin - it will contains the builtin string
+ *@type: command flag
+ *@func: function
  */
 typedef struct builtin
 {
@@ -183,7 +183,7 @@ int populate_env_list(info_t *);
 char *_getenv(info_t *, const char *);
 int _myenv(info_t *);
 
-#define HIST_FILE       ".simple_shell_history"
+#define HIST_FILE       ".history of shell"
 #define HIST_MAX        4096
 
 #define CMD_NORM        0

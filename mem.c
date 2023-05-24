@@ -2,15 +2,15 @@
 
 /**
  * bfree - will void the address and free the pointer
- * @ptr: pointer address
+ * @pntr: pointer address
  * Return: 1 O/W 0
  */
-int bfree(void **ptr)
+int bfree(void **pntr)
 {
-	if (ptr && *ptr)
+	if (pntr && *pntr)
 	{
-		free(*ptr);
-		*ptr = NULL;
+		free(*pntr);
+		*pntr = NULL;
 		return (1);
 	}
 
