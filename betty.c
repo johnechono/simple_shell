@@ -2,13 +2,13 @@
 
 /**
  * sum - add two numbers
- * @a: first number
- * @b: second number
+ * @e: first number
+ * @f: second number
  * Return: int
  */
 
-int sum(int a, int b)
+int sum(int e, int f)
 {
-	return (a + b);
+	return (e + f);
 }
 
