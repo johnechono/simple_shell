@@ -9,7 +9,7 @@
 void free_env(char **env)
 {
 	unsigned int j;
-	
+
 	j = 0;
 	while (env[j] != NULL)
 		free(env[j]);
