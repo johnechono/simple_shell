@@ -4,7 +4,7 @@
  * unset_alias - sets alias
  * @strg: alias string
  * @info: parameter
- * Return: Always 0 on success, 1 on error otherwise
+ * Return: 0 or 1
  */
 int unset_alias(info_t *info, char *strg)
 {
@@ -26,7 +26,7 @@ int unset_alias(info_t *info, char *strg)
  * set_alias - sets alias
  * @strg: alias string
  * @info: parameter
- * Return: Always 0 on success, otherwise 1 on error
+ * Return: 0 or 1
  */
 int set_alias(info_t *info, char *strg)
 {
@@ -43,9 +43,9 @@ int set_alias(info_t *info, char *strg)
 }
 
 /**
- * _myhistory - displays the history list
- * @info: Used to maintain constant function
- *  Return: Always 0
+ * _myhistory - displays the history
+ * @info: info
+ *  Return: 0
  */
 int _myhistory(info_t *info)
 {
@@ -56,7 +56,7 @@ int _myhistory(info_t *info)
 /**
  * print_alias - prints an alias
  * @node: the node
- * Return: Always 0 on success, otherwise 1 on error
+ * Return: 0 or 1
  */
 int print_alias(list_t *node)
 {
@@ -65,8 +65,8 @@ int print_alias(list_t *node)
 
 	if (node)
 	{
-		q = _strchr(node->strg, '=');
-		for (b = node->strg; b <= q; b++)
+		q = _strchr(node->str, '=');
+		for (b = node->str; b <= q; b++)
 			_putchar(*b);
 		_putchar('\'');
 		_puts(q + 1);
@@ -77,9 +77,9 @@ int print_alias(list_t *node)
 }
 
 /**
- * _myalias - mimics the alias
- * @info: Used to maintain constant function prototype.
- * Return: Always 0
+ * _myalias - mimics alias
+ * @info: info
+ * Return: 0
  */
 int _myalias(info_t *info)
 {
