@@ -23,37 +23,37 @@ int _putfd(char d, int fd)
 
 /**
  *_putsfd - writes char to given fd
- * @str: string to be printed
+ * @strg: string to be printed
  * @fd: file descriptor
  * Return: the number of chars put
  */
-int _putsfd(char *str, int fd)
+int _putsfd(char *strg, int fd)
 {
 	int j = 0;
 
-	if (!str)
+	if (!strg)
 		return (0);
-	while (*str)
+	while (*strg)
 	{
-		j += _putfd(*str++, fd);
+		j += _putfd(*strg++, fd);
 	}
 	return (j);
 }
 
 /**
  *_eputs - prints an input string
- * @str: string to be printed
+ * @strg: string to be printed
  * Return: Nothing
  */
-void _eputs(char *str)
+void _eputs(char *strg)
 {
 	int j = 0;
 
-	if (!str)
+	if (!strg)
 		return;
-	while (str[j] != '\0')
+	while (strg[j] != '\0')
 	{
-		_eputchar(str[j]);
+		_eputchar(strg[j]);
 		j++;
 	}
 }
