@@ -1,15 +1,58 @@
 #include "shell.h"
 
 /**
- * find_path - finds cmd in the PATH
- * @info: info
- * @pathstr: string path
- * @cmd: cmd
- * Return: full path or NULL
+ * is_cmd - determines if a file is an executable command
+ * @info: the info struct
+ * @path: path to the file
+ *
+ * Return: 1 if true, 0 otherwise
+ */
+int is_cmd(info_t *info, char *path)
+{
+	struct stat st;
+
+	(void)info;
+	if (!path || stat(path, &st))
+		return (0);
+
+	if (st.st_mode & S_IFREG)
+	{
+		return (1);
+	}
+	return (0);
+}
+
+/**
+ * dup_chars - duplicates characters
+ * @pathstr: the PATH string
+ * @start: starting index
+ * @stop: stopping index
+ *
+ * Return: pointer to new buffer
+ */
+char *dup_chars(char *pathstr, int start, int stop)
+{
+	static char buf[1024];
+	int i = 0, k = 0;
+
+	for (k = 0, i = start; i < stop; i++)
+		if (pathstr[i] != ':')
+			buf[k++] = pathstr[i];
+	buf[k] = 0;
+	return (buf);
+}
+
+/**
+ * find_path - finds this cmd in the PATH string
+ * @info: the info struct
+ * @pathstr: the PATH string
+ * @cmd: the cmd to find
+ *
+ * Return: full path of cmd if found or NULL
  */
 char *find_path(info_t *info, char *pathstr, char *cmd)
 {
-	int a = 0, pos_curr = 0;
+	int i = 0, curr_pos = 0;
 	char *path;
 
 	if (!pathstr)
@@ -21,9 +64,9 @@ char *find_path(info_t *info, char *pathstr, char *cmd)
 	}
 	while (1)
 	{
-		if (!pathstr[a] || pathstr[a] == ':')
+		if (!pathstr[i] || pathstr[i] == ':')
 		{
-			path = dup_chars(pathstr, pos_curr, a);
+			path = dup_chars(pathstr, curr_pos, i);
 			if (!*path)
 				_strcat(path, cmd);
 			else
@@ -33,52 +76,11 @@ char *find_path(info_t *info, char *pathstr, char *cmd)
 			}
 			if (is_cmd(info, path))
 				return (path);
-			if (!pathstr[a])
+			if (!pathstr[i])
 				break;
-			pos_curr = a;
+			curr_pos = i;
 		}
-		a++;
+		i++;
 	}
 	return (NULL);
 }
-
-/**
- * is_cmd - file is executable
- * @info: info
- * @path: path
- * Return: 1 otherwise 0
- */
-int is_cmd(info_t *info, char *path)
-{
-	struct stat sts;
-
-	(void)info;
-	if (!path || stat(path, &sts))
-		return (0);
-
-	if (sts.st_mode & S_IFREG)
-	{
-		return (1);
-	}
-	return (0);
-}
-
-/**
- * dup_chars - duplicates characters
- * @stp: stop index
- * @pathstr: string path
- * @strt: start index
- * Return: the pointer to buffer
- */
-char *dup_chars(char *pathstr, int strt, int stp)
-{
-	static char buf[1024];
-	int a = 0, l = 0;
-
-	for (l = 0, a = strt; a < stp; a++)
-		if (pathstr[a] != ':')
-			buf[l++] = pathstr[a];
-	buf[l] = 0;
-	return (buf);
-}
-

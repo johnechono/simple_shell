@@ -1,68 +1,62 @@
 #include "shell.h"
 
 /**
- * _realloc - reallocates the memory block
- * @size_old: size of previous block
- * @size_new: size of new block
- * @pt: the pointer to previous block
- * Return: pointer
+ **_memset - fills memory with a constant byte
+ *@s: the pointer to the memory area
+ *@b: the byte to fill *s with
+ *@n: the amount of bytes to be filled
+ *Return: (s) a pointer to the memory area s
  */
-void *_realloc(void *pt, unsigned int size_old, unsigned int size_new)
+char *_memset(char *s, char b, unsigned int n)
 {
-	char *q;
+	unsigned int i;
 
-	if (!size_new)
-		return (free(pt), NULL);
-	if (!pt)
-		return (malloc(size_new));
-	if (size_new == size_old)
-		return (pt);
+	for (i = 0; i < n; i++)
+		s[i] = b;
+	return (s);
+}
 
-	q = malloc(size_new);
-	if (!q)
+/**
+ * ffree - frees a string of strings
+ * @pp: string of strings
+ */
+void ffree(char **pp)
+{
+	char **a = pp;
+
+	if (!pp)
+		return;
+	while (*pp)
+		free(*pp++);
+	free(a);
+}
+
+/**
+ * _realloc - reallocates a block of memory
+ * @ptr: pointer to previous malloc'ated block
+ * @old_size: byte size of previous block
+ * @new_size: byte size of new block
+ *
+ * Return: pointer to da ol'block nameen.
+ */
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
+{
+	char *p;
+
+	if (!ptr)
+		return (malloc(new_size));
+	if (!new_size)
+		return (free(ptr), NULL);
+	if (new_size == old_size)
+		return (ptr);
+
+	p = malloc(new_size);
+	if (!p)
 		return (NULL);
 
-	size_old = size_old < size_new ? size_old : size_new;
-	while (size_old--)
-		q[size_old] = ((char *)pt)[size_old];
-	free(pt);
-	return (q);
+	old_size = old_size < new_size ? old_size : new_size;
+	while (old_size--)
+		p[old_size] = ((char *)ptr)[old_size];
+	free(ptr);
+	return (p);
 }
-
-/**
- * ffree - frees the string of strings
- * @p_p: the string of strings
- */
-void ffree(char **p_p)
-{
-	char **b = p_p;
-
-	if (!p_p)
-	{
-		return;
-	}
-	while (*p_p)
-	{
-		free(*p_p++);
-	}
-	free(b);
-}
-
-/**
- * _memset - fills up memory with byte of data
- * @c: byte to fill *a
- * @a: pointer to  memory area
- * @n: amount of bytes to be filled
- * Return: a
- */
-char *_memset(char *a, char c, unsigned int n)
-{
-	unsigned int j;
-
-	for (j = 0; j < n; j++)
-	{
-		a[j] = c;
-	}
-	return (a);
-}
-
