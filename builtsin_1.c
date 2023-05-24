@@ -49,8 +49,8 @@ int set_alias(info_t *info, char *str)
  */
 int _myhistory(info_t *info)
 {
-        print_list(info->history);
-        return (0);
+	print_list(info->history);
+	return (0);
 }
 
 /**
@@ -60,20 +60,20 @@ int _myhistory(info_t *info)
  */
 int print_alias(list_t *node)
 {
-        char *b = NULL;
-        char *q = NULL;
+	char *b = NULL;
+	char *q = NULL;
 
-        if (node)
-        {
-                q = _strchr(node->str, '=');
-                for (b = node->str; b <= q; b++)
-                _putchar(*b);
-                _putchar('\'');
-                _puts(q + 1);
-                _puts("'\n");
-                return (0);
-        }
-        return (1);
+	if (node)
+	{
+		q = _strchr(node->str, '=');
+		for (b = node->str; b <= q; b++)
+		_putchar(*b);
+		_putchar('\'');
+		_puts(q + 1);
+		_puts("'\n");
+		return (0);
+	}
+	return (1);
 }
 
 /**
@@ -83,28 +83,27 @@ int print_alias(list_t *node)
  */
 int _myalias(info_t *info)
 {
-        char *q = NULL;
-        list_t *node = NULL;
-        int b = 0;
+	char *q = NULL;
+	list_t *node = NULL;
+	int b = 0;
 
-        if (info->argc == 1)
-        {
-                node = info->alias;
-                while (node)
-                {
-                        print_alias(node);
-                        node = node->next;
-                }
-                return (0);
-        }
-        for (b = 1; info->argv[b]; b++)
-        {
-                q = _strchr(info->argv[b], '=');
-                if (q)
-                        set_alias(info, info->argv[b]);
-                else
-                        print_alias(node_starts_with(info->alias, info->argv[b], '='));
-        }
-
-        return (0);
+	if (info->argc == 1)
+	{
+		node = info->alias;
+		while (node)
+		{
+			print_alias(node);
+			node = node->next;
+		}
+		return (0);
+	}
+	for (b = 1; info->argv[b]; b++)
+	{
+		q = _strchr(info->argv[b], '=');
+		if (q)
+			set_alias(info, info->argv[b]);
+		else
+			print_alias(node_starts_with(info->alias, info->argv[b], '='));
+	}
+	return (0);
 }

@@ -28,3 +28,41 @@ void *_realloc(void *pt, unsigned int size_old, unsigned int size_new)
 	free(pt);
 	return (q);
 }
+
+/**
+ * ffree - frees the string of strings
+ * @p_p: the string of strings
+ */
+void ffree(char **p_p)
+{
+	char **b = p_p;
+
+	if (!p_p)
+	{
+		return;
+	}
+	while (*p_p)
+	{
+		free(*p_p++);
+	}
+	free(b);
+}
+
+/**
+ * _memset - fills up memory with byte of data
+ * @c: byte to fill *a
+ * @a: pointer to  memory area
+ * @n: amount of bytes to be filled
+ * Return: a
+ */
+char *_memset(char *a, char c, unsigned int n)
+{
+	unsigned int j;
+
+	for (j = 0; j < n; j++)
+	{
+		a[j] = c;
+	}
+	return (a);
+}
+
