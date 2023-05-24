@@ -62,7 +62,7 @@ void _eputs(char *strg)
  * _eputchar - writes the char
  * @d: character to print
  * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
+ * On error, -1 is returned
  */
 int _eputchar(char d)
 {

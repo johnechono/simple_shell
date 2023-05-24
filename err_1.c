@@ -2,39 +2,39 @@
 
 /**
  * remove_comments - function replaces first instance of '#' with '\0'
- * @buf: address
+ * @buff: address
  * Return: Always 0;
  */
-void remove_comments(char *buf)
+void remove_comments(char *buff)
 {
 	int j;
 
-	for (j = 0; buf[j] != '\0'; j++)
-		if (buf[j] == '#' && (!j || buf[j - 1] == ' '))
+	for (j = 0; buff[j] != '\0'; j++)
+		if (buff[j] == '#' && (!j || buff[j - 1] == ' '))
 		{
-			buf[j] = '\0';
+			buff[j] = '\0';
 			break;
 		}
 }
 
 /**
  * _erratoi - function to convert str to an int
- * @s: string
+ * @g: string
  * Return: 0
  */
-int _erratoi(char *s)
+int _erratoi(char *g)
 {
 	int j = 0;
 	unsigned long int result = 0;
 
-	if (*s == '+')
-		s++;  /* TODO: why does this make main return 255? */
-	for (j = 0;  s[j] != '\0'; j++)
+	if (*g == '+')
+		g++;  /* TODO: why does this make main return 255? */
+	for (j = 0;  g[j] != '\0'; j++)
 	{
-		if (s[j] >= '0' && s[j] <= '9')
+		if (g[j] >= '0' && g[j] <= '9')
 		{
 			result *= 10;
-			result += (s[j] - '0');
+			result += (g[j] - '0');
 			if (result > INT_MAX)
 				return (-1);
 		}
@@ -46,28 +46,28 @@ int _erratoi(char *s)
 
 /**
  * print_error - prints an error msg
- * @info: return info struct
- * @estr: string containing specified error type
+ * @infor: return info struct
+ * @estrg: string containing specified error type
  * Return: 0
  */
-void print_error(info_t *info, char *estr)
+void print_error(infor_t *infor, char *estrg)
 {
-	_eputs(info->fname);
+	_eputs(infor->fname);
 	_eputs(": ");
-	print_d(info->line_count, STDERR_FILENO);
+	print_d(infor->line_count, STDERR_FILENO);
 	_eputs(": ");
-	_eputs(info->argv[0]);
+	_eputs(infor->argv[0]);
 	_eputs(": ");
-	_eputs(estr);
+	_eputs(estrg);
 }
 
 /**
  * print_d - function prints a decimal
- * @input: input
+ * @inputs: inputs
  * @fd: the filedescriptor to write
  * Return: number of characters printed
  */
-int print_d(int input, int fd)
+int print_d(int inputs, int fd)
 {
 	int (*__putchar)(char) = _putchar;
 	int j, count = 0;
@@ -75,14 +75,14 @@ int print_d(int input, int fd)
 
 	if (fd == STDERR_FILENO)
 		__putchar = _eputchar;
-	if (input < 0)
+	if (inputs < 0)
 	{
-		_abs_ = -input;
+		_abs_ = -inputs;
 		__putchar('-');
 		count++;
 	}
 	else
-		_abs_ = input;
+		_abs_ = inputs;
 	current = _abs_;
 	for (j = 1000000000; j > 1; j /= 10)
 	{
@@ -101,10 +101,10 @@ int print_d(int input, int fd)
 
 /**
  * convert_number - converter
- * @num: num
+ * @numb: number
  * @base: the base
  * @flags: arg flags
- * Return: str
+ * Return: strg
  */
 char *convert_number(long int num, int base, int flags)
 {
