@@ -57,25 +57,3 @@ int _eputchar(char c)
 		buf[j++] = c;
 	return (1);
 }
-
-/**
- * _putfd - writes the char to given fd
- * @c: char to print
- * @fd: file descriptor
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
- */
-int _putfd(char c, int fd)
-{
-	static int j;
-	static char buf[WRITE_BUF_SIZE];
-
-	if (c == BUF_FLUSH || j >= WRITE_BUF_SIZE)
-	{
-		write(fd, buf, j);
-		j = 0;
-	}
-	if (c != BUF_FLUSH)
-		buf[j++] = c;
-	return (1);
-}
