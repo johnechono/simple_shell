@@ -12,9 +12,9 @@ int _myenv(info_t *info)
 }
 
 /**
- * populate_env_list - populates env list
- * @info: Used to maintain constant function prototype.
- * Return: Always 0
+ * populate_env_list - will populate the env list
+ * @info: will maintain function
+ * Return: 0
  */
 int populate_env_list(info_t *info)
 {
@@ -22,16 +22,18 @@ int populate_env_list(info_t *info)
 	size_t j;
 
 	for (j = 0; environ[j]; j++)
+	{
 		add_node_end(&node, environ[j], 0);
+	}
 	info->env = node;
 	return (0);
 }
 
 /**
- * _getenv - gets the value
+ * _getenv - will get the value of the environ
  * @info: info
- * @name: environment name
- * Return: value of name
+ * @name: name of the env
+ * Return: value
  */
 char *_getenv(info_t *info, const char *name)
 {
@@ -42,16 +44,18 @@ char *_getenv(info_t *info, const char *name)
 	{
 		q = starts_with(node->str, name);
 		if (q && *q)
+		{
 			return (q);
+		}
 		node = node->next;
 	}
 	return (NULL);
 }
 
 /**
- * _mysetenv - setenv
+ * _mysetenv - my setenv
  * @info: info
- * Return: Always 0
+ * Return: 0
  */
 int _mysetenv(info_t *info)
 {
@@ -66,7 +70,7 @@ int _mysetenv(info_t *info)
 }
 
 /**
- * _myunsetenv - Remove an unsetenv
+ * _myunsetenv - will remove the unsetenv
  * @info: info
  * Return: 0
  */

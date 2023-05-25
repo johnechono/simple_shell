@@ -2,73 +2,75 @@
 
 /**
  * *_strchr - locates a character
- * @c: char to look for
- * @s: string passed
- * Return: (s) a pointer to the memory area s
+ * @d: char to look for
+ * @t: string passed
+ * Return: s
  */
-char *_strchr(char *s, char c)
+char *_strchr(char *t, char d)
 {
 	do {
-		if (*s == c)
-			return (s);
-	} while (*s++ != '\0');
+		if (*t == d)
+		{
+			return (t);
+		}
+	} while (*t++ != '\0');
 
 	return (NULL);
 }
 
 /**
- * *_strncpy - copies a str
- * @dest: destination str to be copied
- * @n: amount of char to be copied
- * @src: the source string
- * Return: the concatenated string
+ * *_strncpy - will copy the str
+ * @desti: destination str to be copied
+ * @o: the amount of char to copy
+ * @srce: source of the string
+ * Return: concat string
  */
-char *_strncpy(char *dest, char *src, int n)
+char *_strncpy(char *desti, char *srce, int o)
 {
 	int j, k;
-	char *s = dest;
+	char *t = desti;
 
 	j = 0;
-	while (src[j] != '\0' && j < n - 1)
+	while (srce[j] != '\0' && j < o - 1)
 	{
-		dest[j] = src[j];
+		desti[j] = srce[j];
 		j++;
 	}
-	if (j < n)
+	if (j < o)
 	{
 		k = j;
-		while (k < n)
+		while (k < o)
 		{
-			dest[k] = '\0';
+			desti[k] = '\0';
 			k++;
 		}
 	}
-	return (s);
+	return (t);
 }
 
 /**
- * *_strncat - concatenates strings
- * @dest: first string
- * @src: second string
- * @m: amount of bytes to be maximally used
- * Return: the concatenated string
+ * *_strncat - will concatenate the string
+ * @desti: first string
+ * @srce: second string
+ * @n: the amount of bytes to use
+ * Return: concat string
  */
-char *_strncat(char *dest, char *src, int m)
+char *_strncat(char *desti, char *srce, int n)
 {
 	int j, k;
-	char *s = dest;
+	char *t = desti;
 
 	j = 0;
 	k = 0;
-	while (dest[j] != '\0')
+	while (desti[j] != '\0')
 		j++;
-	while (src[k] != '\0' && k < m)
+	while (srce[k] != '\0' && k < n)
 	{
-		dest[j] = src[k];
+		desti[j] = srce[k];
 		j++;
 		k++;
 	}
-	if (k < m)
-		dest[j] = '\0';
-	return (s);
+	if (k < n)
+		desti[j] = '\0';
+	return (t);
 }
